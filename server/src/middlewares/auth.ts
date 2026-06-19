@@ -20,6 +20,7 @@ export interface IUser {
 
 export interface AuthenticatedRequest extends Request {
   user?: IUser;
+  file?: any;
 }
 
 const JWT_SECRET = process.env.JWT_SECRET || 'xhat_super_secret_jwt_key_13579';
