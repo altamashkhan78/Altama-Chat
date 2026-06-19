@@ -14,6 +14,8 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
+const BACKEND_URL = import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000';
+
 export const Dashboard: React.FC = () => {
   const { user, logout, updateUserProfile, updatePassword, updatePrivacy } = useAuth();
   const { toast } = useToast();
@@ -389,13 +391,13 @@ export const Dashboard: React.FC = () => {
   });
 
   return (
-    <div className="flex-1 flex h-[100vh] w-full relative overflow-hidden bg-transparent dark:bg-slate-950/20 text-slate-800 dark:text-slate-100 font-sans">
+    <div className="flex-1 flex h-[100dvh] w-full relative overflow-hidden bg-transparent dark:bg-slate-950/20 text-slate-800 dark:text-slate-100 font-sans">
       {/* BACKGROUND GRAPHIC ORBS */}
       <div className="absolute top-[-100px] right-[-100px] w-[500px] h-[500px] rounded-full bg-indigo-500/5 dark:bg-indigo-600/5 filter blur-[100px] pointer-events-none -z-10" />
       <div className="absolute bottom-[-100px] left-[-100px] w-[500px] h-[500px] rounded-full bg-purple-500/5 dark:bg-purple-600/5 filter blur-[100px] pointer-events-none -z-10" />
 
       {/* DUAL PANE WRAPPER */}
-      <div className="flex-1 flex max-w-7xl mx-auto w-full h-full glass-panel lg:my-4 lg:h-[calc(100vh-2rem)] lg:rounded-[2rem] lg:border border-white/20 dark:border-white/5 overflow-hidden shadow-2xl relative">
+      <div className="flex-1 flex max-w-7xl mx-auto w-full h-full glass-panel lg:my-4 lg:h-[calc(100dvh-2rem)] lg:rounded-[2rem] lg:border border-white/20 dark:border-white/5 overflow-hidden shadow-2xl relative">
         
         {/* ========================================================= */}
         {/* SIDEBAR PANE (LEFT) */}
@@ -833,29 +835,29 @@ export const Dashboard: React.FC = () => {
                             {msg.messageType === 'image' && msg.fileUrl && (
                               <div className="rounded-lg overflow-hidden my-1 max-w-xs border border-white/10 shadow-sm relative group/img">
                                 <img 
-                                  src={`http://localhost:5000${msg.fileUrl}`} 
+                                  src={`${BACKEND_URL}${msg.fileUrl}`} 
                                   alt="Attachment" 
                                   className="w-full max-h-60 object-cover cursor-pointer hover:opacity-95 transition"
-                                  onClick={() => window.open(`http://localhost:5000${msg.fileUrl}`)}
+                                  onClick={() => window.open(`${BACKEND_URL}${msg.fileUrl}`)}
                                 />
                               </div>
                             )}
 
                             {msg.messageType === 'video' && msg.fileUrl && (
                               <div className="rounded-lg overflow-hidden my-1 max-w-xs shadow-sm">
-                                <video src={`http://localhost:5000${msg.fileUrl}`} controls className="w-full max-h-60 object-cover" />
+                                <video src={`${BACKEND_URL}${msg.fileUrl}`} controls className="w-full max-h-60 object-cover" />
                               </div>
                             )}
 
                             {msg.messageType === 'audio' && msg.fileUrl && (
                               <div className="flex items-center gap-2 py-1 select-none">
-                                <audio src={`http://localhost:5000${msg.fileUrl}`} controls className="w-48 sm:w-60 h-8 brightness-95 opacity-90" />
+                                <audio src={`${BACKEND_URL}${msg.fileUrl}`} controls className="w-48 sm:w-60 h-8 brightness-95 opacity-90" />
                               </div>
                             )}
 
                             {msg.messageType === 'file' && msg.fileUrl && (
                               <a 
-                                href={`http://localhost:5000${msg.fileUrl}`} 
+                                href={`${BACKEND_URL}${msg.fileUrl}`} 
                                 download
                                 target="_blank"
                                 rel="noreferrer"
